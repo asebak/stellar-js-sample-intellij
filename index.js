@@ -4,7 +4,7 @@ var StellarSdk = require('stellar-sdk');
 var HORIZON_API = "https://horizon-testnet.stellar.org/";
 
 
-var createAccount = function(accountId, pubkey) {
+var createAccount = function(pubkey) {
     request.get({
         url: HORIZON_API + '/friendbot',
         qs: { addr: pubkey },
@@ -15,6 +15,13 @@ var createAccount = function(accountId, pubkey) {
         }
         else {
             console.log('SUCCESS! You have a new account :)\n', body);
+
+            server.loadAccount(pair.publicKey()).then(function(account) {
+                console.log('Balances for account: ' + pair.publicKey());
+                account.balances.forEach(function(balance) {
+                    console.log('Type:', balance.asset_type, ', Balance:', balance.balance);
+                });
+            });
         }
     });
 };
@@ -28,10 +35,4 @@ var createKeys = function() {
 
 var server = new StellarSdk.Server(HORIZON_API);
 var pair = createKeys();
-var account = createAccount(pair.xdrAccountId(), pair.publicKey());
-server.loadAccount(pair.publicKey()).then(function(account) {
-    console.log('Balances for account: ' + pair.publicKey());
-    account.balances.forEach(function(balance) {
-        console.log('Type:', balance.asset_type, ', Balance:', balance.balance);
-    });
-});
+var account = createAccount(pair.publicKey());

@@ -1,0 +1,26 @@
+{
+  "name": "stellar-js-sample-intellij",
+  "version": "1.0.0",
+  "description": "IntelliJ plugin sample",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "stellar",
+    "blockchain"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+	"stellar-sdk": "*"
+  }
+}
